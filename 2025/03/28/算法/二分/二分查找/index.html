@@ -6,18 +6,20 @@
   
   <title>二分查找 | 我的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="红蓝染色法我们用left代表蓝色, right代表红色, 蓝色和红色一定是互斥的, 比如蓝色规定代表&lt;&#x3D; target的区域, 那么红色就代表&gt;target的区域 我们如何才能表示成红蓝染色呢？我们可以采用”(“ &#x2F; “[“ left, right “]” &#x2F; “)”的形式。我们规定”[“表示元素本身以及区域以内的元素是未染色的，规定”(“则不包含元素本身">
+  <meta name="description" content="红蓝染色法 我们用left代表蓝色, right代表红色, 蓝色和红色一定是互斥的, 比如蓝色规定代表&lt;&#x3D; target的区域, 那么红色就代表&gt;target的区域 我们如何才能表示成红蓝染色呢？我们可以采用”(“ &#x2F; “[“ left, right “]” &#x2F; “)”的形式。我们规定”[“表示元素本身以及区域以内的元素是未染色的，规定”(“则不包含元素本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二分查找">
-<meta property="og:url" content="http://example.com/2025/03/28/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/index.html">
+<meta property="og:url" content="http://example.com/2025/03/28/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%88%86/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/index.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="红蓝染色法我们用left代表蓝色, right代表红色, 蓝色和红色一定是互斥的, 比如蓝色规定代表&lt;&#x3D; target的区域, 那么红色就代表&gt;target的区域 我们如何才能表示成红蓝染色呢？我们可以采用”(“ &#x2F; “[“ left, right “]” &#x2F; “)”的形式。我们规定”[“表示元素本身以及区域以内的元素是未染色的，规定”(“则不包含元素本身">
+<meta property="og:description" content="红蓝染色法 我们用left代表蓝色, right代表红色, 蓝色和红色一定是互斥的, 比如蓝色规定代表&lt;&#x3D; target的区域, 那么红色就代表&gt;target的区域 我们如何才能表示成红蓝染色呢？我们可以采用”(“ &#x2F; “[“ left, right “]” &#x2F; “)”的形式。我们规定”[“表示元素本身以及区域以内的元素是未染色的，规定”(“则不包含元素本">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-03-28T09:45:42.714Z">
-<meta property="article:modified_time" content="2025-03-28T09:46:26.501Z">
+<meta property="og:image" content="http://example.com/..%5Cassets%5Chtpmwltg9unspvq2%5C1740999564668-c2c347df-3b11-4fd3-8b31-ff4d69aeb066.png">
+<meta property="article:published_time" content="2025-03-28T09:51:45.324Z">
+<meta property="article:modified_time" content="2025-03-28T09:44:48.251Z">
 <meta property="article:author" content="FrostSakura">
 <meta property="article:tag" content="Hexo, 博客, 技术, 生活">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/..%5Cassets%5Chtpmwltg9unspvq2%5C1740999564668-c2c347df-3b11-4fd3-8b31-ff4d69aeb066.png">
   
     <link rel="alternate" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
   
@@ -78,10 +80,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-二分查找" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-算法/二分/二分查找" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2025/03/28/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="article-date">
-  <time class="dt-published" datetime="2025-03-28T09:45:42.714Z" itemprop="datePublished">2025-03-28</time>
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%88%86/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="article-date">
+  <time class="dt-published" datetime="2025-03-28T09:51:45.324Z" itemprop="datePublished">2025-03-28</time>
 </a>
     
   </div>
@@ -100,7 +102,8 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="红蓝染色法"><a href="#红蓝染色法" class="headerlink" title="红蓝染色法"></a>红蓝染色法</h1><p>我们用left代表蓝色, right代表红色, 蓝色和红色一定是互斥的, 比如蓝色规定代表&lt;&#x3D; target的区域, 那么红色就代表&gt;target的区域</p>
+        <h1 id="红蓝染色法"><a href="#红蓝染色法" class="headerlink" title="红蓝染色法"></a>红蓝染色法</h1><p><img src="/..%5Cassets%5Chtpmwltg9unspvq2%5C1740999564668-c2c347df-3b11-4fd3-8b31-ff4d69aeb066.png"></p>
+<p>我们用left代表蓝色, right代表红色, 蓝色和红色一定是互斥的, 比如蓝色规定代表&lt;&#x3D; target的区域, 那么红色就代表&gt;target的区域</p>
 <p>我们如何才能表示成红蓝染色呢？我们可以采用”(“ &#x2F; “[“ left, right “]” &#x2F; “)”的形式。我们规定”[“表示元素本身以及区域以内的元素是未染色的，规定”(“则不包含元素本身。括号内的是还未染色的区域，括号外的是已经染色的区域，这样我们就可以形象地表示出红色区域，蓝色区域以及未处理的元素区域。</p>
 <p>我们通过不断将数组的中间元素和要寻找的元素相比较，来染色未处理得区域，直到所有区域都染色完毕。</p>
 <p>值得一提的是，left和right的移动应该根据它们代表的是开区间还是闭区间来移动。如果是闭区间的话，left或right不能指向mid本身，因为闭区间表示元素本身以及区域内的元素是未处理的，但是很明显，mid已经处理了。</p>
@@ -123,7 +126,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/03/28/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" data-id="cm8slo3mt0000j4ss3p0pewpj" data-title="二分查找" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2025/03/28/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%88%86/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" data-id="cm8slsczc0008g0ss9i58cqdl" data-title="二分查找" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -133,10 +136,19 @@
     
 <nav id="article-nav">
   
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%88%86/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          二分答案
+        
+      </div>
+    </a>
   
-    <a href="/2025/03/28/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/DFS/%E8%BF%9E%E9%80%9A%E5%9D%97/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">连通块</div>
     </a>
   
 </nav>
@@ -174,11 +186,23 @@
       <ul>
         
           <li>
-            <a href="/2025/03/28/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找</a>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%9D%E6%83%B3/">滑动窗口思想</a>
           </li>
         
           <li>
-            <a href="/2025/03/28/hello-world/">Hello World</a>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">定长滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%B1%82%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0/">不定长滑动窗口求子数组个数</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">不定长滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/Prim%E7%AE%97%E6%B3%95%EF%BC%88%E5%8A%A0%E7%82%B9%E6%B3%95%EF%BC%8C%E7%A8%A0%E5%AF%86%E5%9B%BE%EF%BC%89/">Prim算法（加点法，稠密图）</a>
           </li>
         
       </ul>

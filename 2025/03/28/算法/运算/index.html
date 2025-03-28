@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>运算 | 我的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.Math.pow()Math.pow() 函数本身的复杂度并不高，它通常采用快速幂算法来实现，其时间复杂度为 O(log n)，其中 n 是指数。因此，对于小的指数，Math.pow() 的性能是非常好的。 然而，对于大数运算，特别是浮点数运算，Math.pow() 可能会面临一些问题，因为浮点数的表示是有限精度的。这导致了在进行幂运算时可能会丢失精度，特别是当指数较大时。  Math.pow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运算">
+<meta property="og:url" content="http://example.com/2025/03/28/%E7%AE%97%E6%B3%95/%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:site_name" content="我的个人博客">
+<meta property="og:description" content="1.Math.pow()Math.pow() 函数本身的复杂度并不高，它通常采用快速幂算法来实现，其时间复杂度为 O(log n)，其中 n 是指数。因此，对于小的指数，Math.pow() 的性能是非常好的。 然而，对于大数运算，特别是浮点数运算，Math.pow() 可能会面临一些问题，因为浮点数的表示是有限精度的。这导致了在进行幂运算时可能会丢失精度，特别是当指数较大时。  Math.pow">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-28T09:51:45.196Z">
+<meta property="article:modified_time" content="2025-03-28T09:44:48.490Z">
+<meta property="article:author" content="FrostSakura">
+<meta property="article:tag" content="Hexo, 博客, 技术, 生活">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">我的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录我的学习和生活</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-算法/运算" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E8%BF%90%E7%AE%97/" class="article-date">
+  <time class="dt-published" datetime="2025-03-28T09:51:45.196Z" itemprop="datePublished">2025-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      运算
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-Math-pow"><a href="#1-Math-pow" class="headerlink" title="1.Math.pow()"></a>1.Math.pow()</h2><p><strong>Math.pow()</strong><font style="color:rgb(13, 13, 13);"> 函数本身的复杂度并不高，它通常采用快速幂算法来实现，其时间复杂度为 O(log n)，其中 n 是指数。因此，对于小的指数，</font><strong>Math.pow()</strong><font style="color:rgb(13, 13, 13);"> 的性能是非常好的。</font></p>
+<p><font style="color:rgb(13, 13, 13);">然而，对于大数运算，特别是浮点数运算，</font><strong>Math.pow()</strong><font style="color:rgb(13, 13, 13);"> 可能会面临一些问题，因为浮点数的表示是有限精度的。这导致了在进行幂运算时可能会丢失精度，特别是当</font><font style="color:#DF2A3F;">指数</font><font style="color:rgb(13, 13, 13);">较大时。</font></p>
+<p><font style="color:rgb(13, 13, 13);"></font></p>
+<p><font style="color:rgb(13, 13, 13);">Math.pow()返回double类型</font></p>
+<p><font style="color:rgb(13, 13, 13);"></font></p>
+<p><font style="color:rgb(13, 13, 13);"></font></p>
+<h2 id="2-循环中累乘实现幂运算避免精度丢失"><a href="#2-循环中累乘实现幂运算避免精度丢失" class="headerlink" title="2.循环中累乘实现幂运算避免精度丢失"></a><font style="color:rgb(13, 13, 13);">2.循环中累乘实现幂运算避免精度丢失</font></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">long</span> <span class="title function_">power</span><span class="params">(<span class="type">int</span> base, <span class="type">int</span> exponent, <span class="type">int</span> modulo)</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; exponent; i++) &#123;</span><br><span class="line">        result = (result * base) % modulo;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-辗转相除法-gcd-求最大公约数"><a href="#3-辗转相除法-gcd-求最大公约数" class="headerlink" title="3.辗转相除法(gcd)求最大公约数"></a>3.辗转相除法(gcd)求最大公约数</h2><p><font style="color:rgb(13, 13, 13);">求最小公约数（GCD）可以使用欧几里得算法，也称为辗转相除法。这个算法的基本思想是，两个整数的最大公约数等于其中较小的数和两数相除余数的最大公约数。</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> b;</span><br><span class="line">        b = a % b;</span><br><span class="line">        a = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(13, 13, 13);"></font></p>
+<p><font style="color:rgb(13, 13, 13);">简单写法</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> b == <span class="number">0</span> ? a : gcd(b, a % b);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(13, 13, 13);"></font></p>
+<p><font style="color:rgb(13, 13, 13);"></font></p>
+<p><font style="color:rgb(13, 13, 13);">要求一个 List 中所有元素的最小公约数，可以按照类似数组的方法来处理。遍历 List 中的元素，对每对相邻的元素求最大公约数，然后将结果与下一个元素继续求最大公约数，直到遍历完整个 List。</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">listGCD</span><span class="params">(List&lt;Integer&gt; list)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (list.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 如果列表为空，则返回0</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> list.get(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">            result = gcd(result, list.get(i));</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 如果结果已经为1，那么最小公约数已经是1，无需继续计算</span></span><br><span class="line">            <span class="keyword">if</span> (result == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> b;</span><br><span class="line">            b = a % b;</span><br><span class="line">            a = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-取模运算"><a href="#4-取模运算" class="headerlink" title="4.取模运算"></a><font style="color:rgb(38, 38, 38);">4.取模运算</font></h2><h3 id="数字拆分：通过取模运算可以将一个整数拆分成各个数字。"><a href="#数字拆分：通过取模运算可以将一个整数拆分成各个数字。" class="headerlink" title="数字拆分：通过取模运算可以将一个整数拆分成各个数字。"></a><font style="color:rgb(13, 13, 13);">数字拆分：通过取模运算可以将一个整数拆分成各个数字。</font></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">123456</span>;</span><br><span class="line">        <span class="comment">// 循环直到 number 变为 0</span></span><br><span class="line">        <span class="keyword">while</span> (number &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 取 number 的个位数</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">digit</span> <span class="operator">=</span> number % <span class="number">10</span>;</span><br><span class="line">            <span class="comment">// 打印该位数</span></span><br><span class="line">            System.out.println(digit);</span><br><span class="line">            <span class="comment">// 去掉 number 的个位数</span></span><br><span class="line">            number = number / <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果想要从高位到地位，可以自己写一个reverse()方法。</p>
+<h3 id="周期性计算：在周期性任务或循环中，取模运算可以帮助确保计数器保持在指定范围内，以避免溢出或超出预期的边界。"><a href="#周期性计算：在周期性任务或循环中，取模运算可以帮助确保计数器保持在指定范围内，以避免溢出或超出预期的边界。" class="headerlink" title="周期性计算：在周期性任务或循环中，取模运算可以帮助确保计数器保持在指定范围内，以避免溢出或超出预期的边界。"></a><font style="color:rgb(13, 13, 13);">周期性计算：在周期性任务或循环中，取模运算可以帮助确保计数器保持在指定范围内，以避免溢出或超出预期的边界。</font></h3><p>比如说进位就常常用到取模，避免溢出，使数据保持在指定范围内</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">addBinary</span><span class="params">(String a, String b)</span> &#123;</span><br><span class="line">        <span class="type">int</span> n=Math.max(a.length(),b.length());</span><br><span class="line">        <span class="type">int</span> carry=<span class="number">0</span>;</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            carry+=i&lt;a.length()?(a.charAt(a.length()-<span class="number">1</span>-i)-<span class="string">&#x27;0&#x27;</span>):<span class="number">0</span>;</span><br><span class="line">            carry+=i&lt;b.length()?(b.charAt(b.length()-<span class="number">1</span>-i)-<span class="string">&#x27;0&#x27;</span>):<span class="number">0</span>;</span><br><span class="line">            sb.insert(<span class="number">0</span>,carry%<span class="number">2</span>);</span><br><span class="line">            carry/=<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(carry&gt;<span class="number">0</span>)sb.insert(<span class="number">0</span>,<span class="string">&#x27;1&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-四舍五入"><a href="#5-四舍五入" class="headerlink" title="5.四舍五入"></a>5.四舍五入</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/account-balance-after-rounded-purchase/">2806. 取整购买后的账户余额</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">accountBalanceAfterPurchase</span><span class="params">(<span class="type">int</span> purchaseAmount)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">100</span> - (purchaseAmount + <span class="number">5</span>) / <span class="number">10</span> * <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-求一个数的第一位和最后一位"><a href="#6-求一个数的第一位和最后一位" class="headerlink" title="6.求一个数的第一位和最后一位"></a>6.求一个数的第一位和最后一位</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getFirst</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (x &gt;= <span class="number">10</span>) &#123;</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getLast</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> x % <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-数字倒转"><a href="#7-数字倒转" class="headerlink" title="7.数字倒转"></a>7.数字倒转</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="title function_">rev</span><span class="params">(<span class="type">int</span> nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">rev</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (nums != <span class="number">0</span>) &#123;</span><br><span class="line">            rev = rev * <span class="number">10</span> + nums % <span class="number">10</span>;</span><br><span class="line">            nums /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> rev;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-Math-pow-返回的是double类型，需要强制转换为int类型才能进行整数运算，不要忽略！"><a href="#8-Math-pow-返回的是double类型，需要强制转换为int类型才能进行整数运算，不要忽略！" class="headerlink" title="8.Math.pow()返回的是double类型，需要强制转换为int类型才能进行整数运算，不要忽略！"></a>8.Math.pow()返回的是double类型，需要强制转换为int类型才能进行整数运算，不要忽略！</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/03/28/%E7%AE%97%E6%B3%95/%E8%BF%90%E7%AE%97/" data-id="cm8slsczb0005g0ssgdt97erw" data-title="运算" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E9%80%92%E5%BD%92/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          递归
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%BA%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">回溯</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%9D%E6%83%B3/">滑动窗口思想</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">定长滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%B1%82%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0/">不定长滑动窗口求子数组个数</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">不定长滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/Prim%E7%AE%97%E6%B3%95%EF%BC%88%E5%8A%A0%E7%82%B9%E6%B3%95%EF%BC%8C%E7%A8%A0%E5%AF%86%E5%9B%BE%EF%BC%89/">Prim算法（加点法，稠密图）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 FrostSakura<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

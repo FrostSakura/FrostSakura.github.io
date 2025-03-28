@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>KMP算法中的next数组构建 | 我的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="KMP算法原理描述，告诉你为什么要“j &#x3D; next[j]” 研究KMP算法的起因，是在刷leetcode的 214.最短回文串时，一开始使用了 O ( n 2 ) O(n^2) O(n2)时间复杂度的暴力算法，结果在一条 n &#x3D; 40000 n&#x3D;40000 n&#x3D;40000的测试数据上超时了，后来在题解的启发下，用了KMP算法双95%+成功过了该题。但是在用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP算法中的next数组构建">
+<meta property="og:url" content="http://example.com/2025/03/28/%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84next%E6%95%B0%E7%BB%84%E6%9E%84%E5%BB%BA/index.html">
+<meta property="og:site_name" content="我的个人博客">
+<meta property="og:description" content="KMP算法原理描述，告诉你为什么要“j &#x3D; next[j]” 研究KMP算法的起因，是在刷leetcode的 214.最短回文串时，一开始使用了 O ( n 2 ) O(n^2) O(n2)时间复杂度的暴力算法，结果在一条 n &#x3D; 40000 n&#x3D;40000 n&#x3D;40000的测试数据上超时了，后来在题解的启发下，用了KMP算法双95%+成功过了该题。但是在用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C20200829221853626.png">
+<meta property="og:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C20200829221912635.png">
+<meta property="og:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C20200829222954824.png">
+<meta property="og:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C20200829223408839.png">
+<meta property="og:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C20200829230020533.png">
+<meta property="og:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C2020082923210196.png">
+<meta property="og:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C2020082923095993.png">
+<meta property="og:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C20200829231546742.png">
+<meta property="og:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C20200829232238449.png">
+<meta property="og:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C20200829232520290.png">
+<meta property="article:published_time" content="2025-03-28T09:51:45.186Z">
+<meta property="article:modified_time" content="2025-03-28T09:44:51.615Z">
+<meta property="article:author" content="FrostSakura">
+<meta property="article:tag" content="Hexo, 博客, 技术, 生活">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets%5Ckpfaifble01qnhur%5C20200829221853626.png">
+  
+    <link rel="alternate" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">我的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录我的学习和生活</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-算法/KMP算法中的next数组构建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84next%E6%95%B0%E7%BB%84%E6%9E%84%E5%BB%BA/" class="article-date">
+  <time class="dt-published" datetime="2025-03-28T09:51:45.186Z" itemprop="datePublished">2025-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      KMP算法中的next数组构建
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=KMP%E7%AE%97%E6%B3%95&spm=1001.2101.3001.7020">KMP算法</a>原理描述，告诉你为什么要“j &#x3D; next[j]”</p>
+<p>研究KMP算法的起因，是在刷<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=leetcode&spm=1001.2101.3001.7020">leetcode</a>的 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shortest-palindrome/">214.最短回文串</a>时，一开始使用了 O ( n 2 ) O(n^2) O(n2)<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6&spm=1001.2101.3001.7020">时间复杂度</a>的暴力算法，结果在一条 n &#x3D; 40000 n&#x3D;40000 n&#x3D;40000的测试数据上超时了，后来在题解的启发下，用了KMP算法双95%+成功过了该题。但是在用KMP算法的时候，对于next数组的计算方式，尤其是回退的那一步始终没想明白，看了许多博客也没有描述清楚，当初上课学习KMP算法的时候对这块就是一知半解，今天花了点时间，终于算是把最令人困惑的”j &#x3D; next[j]”这里搞清楚了。</p>
+<h3 id="0-KMP算法简介"><a href="#0-KMP算法简介" class="headerlink" title="0. KMP算法简介"></a>0. KMP算法简介</h3><p>KMP 算法是 一种字符串匹配算法，D.E.Knuth、J,H,Morris 和 V.R.Pratt 共同提出的，称之为 Knuth-Morria-Pratt 算法，简称 KMP 算法。该算法相对于暴力算法的最核心优化点是在匹配过程中，通过某些规则移动模式串指针，使得主串指针可以保持不回退，从而提升匹配效率。</p>
+<h3 id="1-暴力算法的缺陷"><a href="#1-暴力算法的缺陷" class="headerlink" title="1. 暴力算法的缺陷"></a>1. 暴力算法的缺陷</h3><p>在暴力算法中，当主串的某一段与模式串的前i-1位相同，但第i位不同时，本次匹配失败。模式串会向后移动一位、指针回退到0，而主串的指针也会回退到与模式串首位相同的位置上，如下图所示：</p>
+<p><img src="/assets%5Ckpfaifble01qnhur%5C20200829221853626.png"></p>
+<p>每次主串指针都会回退到上一次开始地方的后一位，模式串的指针也会回退到0，这样的时间复杂度是 O ( m ∗ n ) O(m * n) O(m∗n)。</p>
+<h3 id="2-KMP算法的核心概念：最长公共前缀子串"><a href="#2-KMP算法的核心概念：最长公共前缀子串" class="headerlink" title="2. KMP算法的核心概念：最长公共前缀子串"></a>2. KMP算法的核心概念：最长公共前缀子串</h3><p>当一次匹配失败后，我们每次将模式串右移一位，并且将主串和模式串的指针全部回溯，其实是浪费了我们在本次匹配中已经发现的一些经验。考虑下面的一种情况：</p>
+<p><img src="/assets%5Ckpfaifble01qnhur%5C20200829221912635.png"></p>
+<p>如图，在这种情况下，我们可以将原来模式串头部深绿色的部分，挪动到模式串没有匹配成功的红色前面的深绿色部分去，这样主串的指针就不用回退了，模式串的指针也不再需要回退到开头的位置了。</p>
+<p>模式串中，<strong>重复的两个深绿色的部分</strong>具有这样的特点：</p>
+<ol>
+<li><strong>第一个深绿色的部分，从模式串的头部开始</strong>。为什么是从模式串的头部开始？因为我们要保证，模式串右移后，和主串仍有一部分是匹配的，我们可以从模式串的这个前缀后面继续判断，这是模式串指针不需要回退到开头的原因；</li>
+<li><strong>第二个深绿色的部分，以模式串当前未匹配成功的位置为结尾</strong>。为什么是以模式串当前未匹配成功的位置为结尾？因为只有这样，当我们右移模式串，使得这两个深绿色的部分“重合”之后，我们仍可以从主串出错的位置（红色部分）和模式串（第一个深绿色部分后的下一个字符）进行匹配，这是主串指针不需要回退的原因。</li>
+</ol>
+<p>至此，KMP算法的核心概念已经呼之欲出了：深绿色的部分，就是浅绿色部分的“<strong>最长公共前缀子串</strong>”。“公共”，代表着两个深绿色部分的内容相同；“前缀”，代表着从模式串的头部开始。</p>
+<h3 id="3-恼人的“next数组”"><a href="#3-恼人的“next数组”" class="headerlink" title="3. 恼人的“next数组”"></a>3. 恼人的“next数组”</h3><p>你可能已经意识到了，“最长前缀公共子串”和主串无关，它完全是模式串的一个属性。而KMP算法求“最长前缀公共子串”的方法，使用的就是“next数组”的概念，这个也是大多数人在学习KMP算法上面最大的一个坎。next数组的概念如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next[i] = j，即模式串的前i个字符组成的字符串中，最长前缀公共子串的长度为j。</span><br></pre></td></tr></table></figure>
+
+<p>是不是有点困惑？看看下面的例子：<br><img src="/assets%5Ckpfaifble01qnhur%5C20200829222954824.png"><br>在上一个例子中，next数组元素的值分别为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">next[0] = 0;</span><br><span class="line">next[1] = 0;</span><br><span class="line">next[2] = 0;</span><br><span class="line">next[3] = 0;</span><br><span class="line">next[4] = 1;</span><br><span class="line">next[5] = 2;</span><br><span class="line">next[6] = 0;</span><br></pre></td></tr></table></figure>
+
+<p>再抽象一点，next数组的含义是这样的：<br><img src="/assets%5Ckpfaifble01qnhur%5C20200829223408839.png"><br>emmm，与其叫它”next“数组，还不如叫它”最长公共子串前缀长度数组“呢。。。</p>
+<p>那么问题来了，怎么求这个next数组呢？</p>
+<p>根据我们前面分析的next数组的定义，可以找到下面的规律：</p>
+<ol>
+<li>如果新加入的字符与前一个最长公共前缀子串的后一个字符相同：<br><img src="/assets%5Ckpfaifble01qnhur%5C20200829230020533.png"><br>这里的深绿色部分长度是可以为0的，对后面计算没有影响。<br><img src="/assets%5Ckpfaifble01qnhur%5C2020082923210196.png"><br>这种情况下，很简单，next[i] &#x3D; next[i-1] + 1。这个很好理解，相信大家一看就能想到。</li>
+<li>如果新加入的字符与前一个最长公共前缀子串的后一个字符不同：<br>很多人看KMP算法就是卡在了这一步上，我最开始看的时候也是对这个地方百思不得其解，在其他人的代码中，那个最让人头痛的回退操作——j &#x3D; next[j]，就是在这里出现的。为了说明白这个问题，我们看下这张图：<br><img src="/assets%5Ckpfaifble01qnhur%5C2020082923095993.png"><br>在这种情况下，原来的深绿色部分就不能用了，显然，我们要缩小深绿色的部分，还要满足最长公共前缀子串的要求，也就像下面这个样子：<br><img src="/assets%5Ckpfaifble01qnhur%5C20200829231546742.png"><br>这个蓝色的部分怎么求呢？这就是很多博客和代码里面没有说清楚的，最让人头痛的回退操作，就是那个臭名昭著的”j&#x3D; next[j]“。<br>我们换一种理解方式，这个蓝色的部分，首先要内容相同，其次还要位于深绿色部分的开头和结尾，这不就是<strong>深绿色部分的最长公共前缀子串</strong>吗？<br><img src="/assets%5Ckpfaifble01qnhur%5C20200829232238449.png"><br>也就是这样：<br><img src="/assets%5Ckpfaifble01qnhur%5C20200829232520290.png"><br>更新j &#x3D; next[j]后，又回到这个问题的起点了，然后再次判断s[i-1]和s[j]是否相同就可以了。<br>至此，我们终于搞懂那个让人费解的回退操作到底是什么意思了，其实就是在当前的公共前缀已经不能用了，那就继续去尝试这个公共前缀的公共前缀，一直试到成功或者公共前缀的长度为0时为止。</li>
+</ol>
+<h3 id="4-Java实现"><a href="#4-Java实现" class="headerlink" title="4. Java实现"></a>4. Java实现</h3><p>最后贴个Java实现代码。注意模式串长度小于2就没有必要用KMP了，这里简单先不考虑了，要抄代码的话记得检查，小心数组越界哦：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模式串长度小于2就没有必要用KMP了，这里简单先不考虑了，要抄代码的话记得检查，小心数组越界哦</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span>[] getNext(String s) &#123;</span><br><span class="line">    <span class="type">int</span>[] next = <span class="keyword">new</span> <span class="title class_">int</span>[s.length()];</span><br><span class="line">    <span class="comment">//前0个字符，肯定没有最长公共前缀子串</span></span><br><span class="line">    next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//前1个字符，那也没有嘛</span></span><br><span class="line">    next[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//上一个最长公共前缀子串长度</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">subPublicPreSubStrLength</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">subStrLength</span> <span class="operator">=</span> <span class="number">2</span>; subStrLength &lt; s.length(); ) &#123;</span><br><span class="line">        <span class="comment">//需要求前i个字符组成的字符串中的前缀子串，这个是新加入尾部的字符</span></span><br><span class="line">        <span class="type">char</span> <span class="variable">addedSubStrChar</span> <span class="operator">=</span> s.charAt(subStrLength - <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//位于最长公共前缀子串后的字符</span></span><br><span class="line">        <span class="type">char</span> <span class="variable">addedPreSubStrChar</span> <span class="operator">=</span> s.charAt(subPublicPreSubStrLength);   </span><br><span class="line">        <span class="keyword">if</span> (addedSubStrChar == addedPreSubStrChar) &#123;</span><br><span class="line">            <span class="comment">//新加入的字符和之前的最长公共前缀子串后的字符相同</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">//最长公共子串是在前一个的基础上，再加一个字符</span></span><br><span class="line">            next[subStrLength] = ++subPublicPreSubStrLength;</span><br><span class="line">            <span class="comment">//继续求i+1个字符组成的字符串中的前缀子串</span></span><br><span class="line">            subStrLength++;     </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//新加入的字符和之前最长公共前缀子串后的字符不同，说明之前的公共子串已经不能用了</span></span><br><span class="line">            <span class="keyword">if</span> (subPublicPreSubStrLength == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">//前一个公共子串长度已经为0了，那说明当前情况下的公共子串也只能是0了</span></span><br><span class="line">                next[subStrLength] = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">//继续求i+1个字符组成的字符串中的前缀子串</span></span><br><span class="line">                subStrLength++;     </span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//继续求前一个前缀子串的前缀子串，这里就是那个最让人搞不懂的，k = next[k]的回退</span></span><br><span class="line">                subPublicPreSubStrLength = next[subPublicPreSubStrLength];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本来可以写的很简洁，但是我特意把各个变量的命名写的清楚一些，配合注释希望大家能看懂。建议大家要是抄代码的话，可以换个其他人的写法来抄，我这个为了看清楚写的很冗长，很多地方可以优化调整，主要是能看明白思路就好。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/03/28/%E7%AE%97%E6%B3%95/KMP%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84next%E6%95%B0%E7%BB%84%E6%9E%84%E5%BB%BA/" data-id="cm8slscz40000g0ss2wgah1cy" data-title="KMP算法中的next数组构建" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E4%BD%8D%E8%BF%90%E7%AE%97/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          位运算
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/BFS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">BFS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%9D%E6%83%B3/">滑动窗口思想</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">定长滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%B1%82%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0/">不定长滑动窗口求子数组个数</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">不定长滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/Prim%E7%AE%97%E6%B3%95%EF%BC%88%E5%8A%A0%E7%82%B9%E6%B3%95%EF%BC%8C%E7%A8%A0%E5%AF%86%E5%9B%BE%EF%BC%89/">Prim算法（加点法，稠密图）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 FrostSakura<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

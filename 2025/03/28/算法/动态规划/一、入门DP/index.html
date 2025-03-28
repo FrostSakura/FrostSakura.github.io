@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>一、入门DP | 我的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.1 爬楼梯题型特点给你target(台阶数)和几种方案(一次走几步)，求到达target的总方法数。 几个变种1.target是一个区间具体可见2466. 统计构造好字符串的方案数 2.分组动态规划(乘法原理)这时候需要进行多次动态规划，一组一次 具体可见2266. 统计打字方案数 1.2 打家劫舍题型特点这些题目通常有一个相邻元素不能同时选取的限制。例如，不能抢劫相邻的两栋房子或在一个特定的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一、入门DP">
+<meta property="og:url" content="http://example.com/2025/03/28/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E4%B8%80%E3%80%81%E5%85%A5%E9%97%A8DP/index.html">
+<meta property="og:site_name" content="我的个人博客">
+<meta property="og:description" content="1.1 爬楼梯题型特点给你target(台阶数)和几种方案(一次走几步)，求到达target的总方法数。 几个变种1.target是一个区间具体可见2466. 统计构造好字符串的方案数 2.分组动态规划(乘法原理)这时候需要进行多次动态规划，一组一次 具体可见2266. 统计打字方案数 1.2 打家劫舍题型特点这些题目通常有一个相邻元素不能同时选取的限制。例如，不能抢劫相邻的两栋房子或在一个特定的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-28T09:51:45.329Z">
+<meta property="article:modified_time" content="2025-03-28T09:44:48.516Z">
+<meta property="article:author" content="FrostSakura">
+<meta property="article:tag" content="Hexo, 博客, 技术, 生活">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">我的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录我的学习和生活</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-算法/动态规划/一、入门DP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E4%B8%80%E3%80%81%E5%85%A5%E9%97%A8DP/" class="article-date">
+  <time class="dt-published" datetime="2025-03-28T09:51:45.329Z" itemprop="datePublished">2025-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      一、入门DP
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-1-爬楼梯"><a href="#1-1-爬楼梯" class="headerlink" title="1.1 爬楼梯"></a>1.1 爬楼梯</h2><h3 id="题型特点"><a href="#题型特点" class="headerlink" title="题型特点"></a>题型特点</h3><p>给你target(台阶数)和几种方案(一次走几步)，求到达target的总方法数。</p>
+<h3 id="几个变种"><a href="#几个变种" class="headerlink" title="几个变种"></a>几个变种</h3><h4 id="1-target是一个区间"><a href="#1-target是一个区间" class="headerlink" title="1.target是一个区间"></a>1.target是一个区间</h4><p>具体可见<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-ways-to-build-good-strings/description/">2466. 统计构造好字符串的方案数</a></p>
+<h4 id="2-分组动态规划-乘法原理"><a href="#2-分组动态规划-乘法原理" class="headerlink" title="2.分组动态规划(乘法原理)"></a>2.分组动态规划(乘法原理)</h4><p>这时候需要进行多次动态规划，一组一次</p>
+<p>具体可见<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-number-of-texts/">2266. 统计打字方案数</a></p>
+<h2 id="1-2-打家劫舍"><a href="#1-2-打家劫舍" class="headerlink" title="1.2 打家劫舍"></a>1.2 打家劫舍</h2><h3 id="题型特点-1"><a href="#题型特点-1" class="headerlink" title="题型特点"></a>题型特点</h3><p>这些题目通常有一个相邻元素不能同时选取的限制。例如，不能抢劫相邻的两栋房子或在一个特定的布局中不能选择相邻的两个元素。</p>
+<h3 id="解题方法"><a href="#解题方法" class="headerlink" title="解题方法"></a>解题方法</h3><p>选或者不选的思路，分两种情况判断。</p>
+<h3 id="几个变种-1"><a href="#几个变种-1" class="headerlink" title="几个变种"></a>几个变种</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-and-earn/">740. 删除并获得点数</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-total-damage-with-spell-casting/">100316. 施咒的最大总伤害</a></p>
+<p>板子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">long</span> <span class="title function_">maximumTotalDamage</span><span class="params">(<span class="type">int</span>[] power)</span> &#123;</span><br><span class="line">        Arrays.sort(power);</span><br><span class="line">        List&lt;<span class="type">int</span>[]&gt; res = countByElement(power);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> res.size();</span><br><span class="line">        <span class="type">long</span>[] memo = <span class="keyword">new</span> <span class="title class_">long</span>[n];</span><br><span class="line">        Arrays.fill(memo, -<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> dfs(res, n - <span class="number">1</span>, memo);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;<span class="type">int</span>[]&gt; countByElement(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">        List&lt;<span class="type">int</span>[]&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> <span class="variable">cnt</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> arr.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[i] == arr[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                res.add(<span class="keyword">new</span> <span class="title class_">int</span>[] &#123; arr[i - <span class="number">1</span>], cnt &#125;);</span><br><span class="line">                cnt = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        res.add(<span class="keyword">new</span> <span class="title class_">int</span>[] &#123; arr[n - <span class="number">1</span>], cnt &#125;);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">long</span> <span class="title function_">dfs</span><span class="params">(List&lt;<span class="type">int</span>[]&gt; res, <span class="type">int</span> i, <span class="type">long</span>[] memo)</span> &#123;</span><br><span class="line">        <span class="comment">// 边界条件</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (memo[i] != -<span class="number">1</span>) <span class="keyword">return</span> memo[i];</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> res.get(i)[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// 当前下标的前一个</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i - <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 找到最远的不在区间内的下标</span></span><br><span class="line">        <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; x - res.get(j)[<span class="number">0</span>] &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// x要强制类型转换成long,不然int * int可能会溢出</span></span><br><span class="line">        <span class="keyword">return</span> memo[i] = Math.max(dfs(res, i - <span class="number">1</span>, memo),  (<span class="type">long</span>)x * res.get(i)[<span class="number">1</span>] + dfs(res, j, memo));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这两道题不是相邻元素不能选取，它是给你一个区间，区间范围内的元素不能选取</p>
+<p>我们可以先排序，然后从后往前选取，这样只需要考虑前面的，不需要考虑后面的。</p>
+<p>我们用 i 代表下标，i 是从0 到 n - 1，所以总共有n个状态</p>
+<p>边界条件是i &lt; 0</p>
+<p>然后我们定义一个j &#x3D; i - 1,利用循环找到第一个不在区间内的下标，作为下一次递归传入的对象。</p>
+<p>说到底，还是只需要考虑两个变量，一个是当前的，一个是第一个不在区间范围内的，用max(dfs不选，选 + dfs第一个不在区间内的)</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-ii/">213. 打家劫舍 II</a></p>
+<p>变成两个</p>
+<h2 id="1-3-1-最大子数组和-自己思考"><a href="#1-3-1-最大子数组和-自己思考" class="headerlink" title="1.3.1 最大子数组和(自己思考)"></a>1.3.1 最大子数组和(自己思考)</h2><h3 id="题型特点-2"><a href="#题型特点-2" class="headerlink" title="题型特点:"></a>题型特点:</h3><p>求出最大的连续子数组的和</p>
+<h3 id="做题方法："><a href="#做题方法：" class="headerlink" title="做题方法："></a>做题方法：</h3><p>引入全局变量maxSum</p>
+<p>定义 dfs(i) 为以索引 i 为起始的最大子数组和，采取停&#x2F;不停的思路</p>
+<p>如果选择停，不继续添加子数组了，那么不要继续递归，nums[i]</p>
+<p>如果不停，那么继续递归，nums[i] + dfs(i + 1)</p>
+<p>更新maxSum,总共更新n次</p>
+<h3 id="代码模板（递归）"><a href="#代码模板（递归）" class="headerlink" title="代码模板（递归）"></a>代码模板（递归）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">maxSum</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxSubArray</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        dfs(nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> maxSum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> i)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &gt;= nums.length) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">curMax</span> <span class="operator">=</span> Math.max(nums[i], nums[i] + dfs(nums, i + <span class="number">1</span>));</span><br><span class="line">        maxSum = Math.max(maxSum, curMax);</span><br><span class="line">        <span class="keyword">return</span> curMax;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码模板（动态规划）"><a href="#代码模板（动态规划）" class="headerlink" title="代码模板（动态规划）"></a>代码模板（动态规划）</h3><p>记得maxSum初始化为f[n - 1]，否则如果数组大小为1的话会出错。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> maxSum;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxSubArray</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span>[] f = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        f[n - <span class="number">1</span>] = nums[n - <span class="number">1</span>];</span><br><span class="line">        maxSum = f[n - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            f[i] = Math.max(nums[i], nums[i] + f[i + <span class="number">1</span>]);</span><br><span class="line">            maxSum = Math.max(maxSum, f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码模板（优化空间复杂度）"><a href="#代码模板（优化空间复杂度）" class="headerlink" title="代码模板（优化空间复杂度）"></a>代码模板（优化空间复杂度）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> maxSum;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxSubArray</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">curMax</span> <span class="operator">=</span> nums[n - <span class="number">1</span>];</span><br><span class="line">        maxSum = curMax;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> n - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            curMax = Math.max(nums[i], nums[i] + curMax);</span><br><span class="line">            maxSum = Math.max(maxSum, curMax);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3-2-最大子数组和-灵神模板"><a href="#1-3-2-最大子数组和-灵神模板" class="headerlink" title="1.3.2 最大子数组和(灵神模板)"></a>1.3.2 最大子数组和(灵神模板)</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/solutions/2533977/qian-zhui-he-zuo-fa-ben-zhi-shi-mai-mai-abu71/">两种方法：前缀和&#x2F;动态规划（Python&#x2F;Java&#x2F;C++&#x2F;C&#x2F;Go&#x2F;JS&#x2F;Rust）</a></p>
+<h3 id="变种"><a href="#变种" class="headerlink" title="变种"></a>变种</h3><h4 id="2606-找到最大开销的子字符串"><a href="#2606-找到最大开销的子字符串" class="headerlink" title="2606. 找到最大开销的子字符串"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-substring-with-maximum-cost/">2606. 找到最大开销的子字符串</a></h4><p>可以一个都不选</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/03/28/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E4%B8%80%E3%80%81%E5%85%A5%E9%97%A8DP/" data-id="cm8slscze000cg0ss3ovfdbar" data-title="一、入门DP" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E4%B8%89%E3%80%81%E7%8A%B6%E6%80%81%E6%9C%BADP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          三、状态机DP
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%88%86/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">二分答案</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%80%9D%E6%83%B3/">滑动窗口思想</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">定长滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%B1%82%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0/">不定长滑动窗口求子数组个数</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">不定长滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/28/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/Prim%E7%AE%97%E6%B3%95%EF%BC%88%E5%8A%A0%E7%82%B9%E6%B3%95%EF%BC%8C%E7%A8%A0%E5%AF%86%E5%9B%BE%EF%BC%89/">Prim算法（加点法，稠密图）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 FrostSakura<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
