@@ -1,37 +1,221 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>二分查找 | FrostSakura的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="红蓝染色法 我们用left代表蓝色, right代表红色, 蓝色和红色一定是互斥的, 比如蓝色规定代表&lt;&#x3D; target的区域, 那么红色就代表&gt;target的区域 我们如何才能表示成红蓝染色呢？我们可以采用”(“ &#x2F; “[“ left, right “]” &#x2F; “)”的形式。我们规定”[“表示元素本身以及区域以内的元素是未染色的，规定”(“则不包含元素本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分查找">
+<meta property="og:url" content="http://example.com/2025/03/28/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/index.html">
+<meta property="og:site_name" content="FrostSakura的个人博客">
+<meta property="og:description" content="红蓝染色法 我们用left代表蓝色, right代表红色, 蓝色和红色一定是互斥的, 比如蓝色规定代表&lt;&#x3D; target的区域, 那么红色就代表&gt;target的区域 我们如何才能表示成红蓝染色呢？我们可以采用”(“ &#x2F; “[“ left, right “]” &#x2F; “)”的形式。我们规定”[“表示元素本身以及区域以内的元素是未染色的，规定”(“则不包含元素本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/..%5Cassets%5Chtpmwltg9unspvq2%5C1740999564668-c2c347df-3b11-4fd3-8b31-ff4d69aeb066.png">
+<meta property="article:published_time" content="2025-03-28T15:15:14.208Z">
+<meta property="article:modified_time" content="2025-03-28T15:14:52.520Z">
+<meta property="article:author" content="FrostSakura">
+<meta property="article:tag" content="Hexo, 博客, 技术, 生活">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/..%5Cassets%5Chtpmwltg9unspvq2%5C1740999564668-c2c347df-3b11-4fd3-8b31-ff4d69aeb066.png">
+  
+    <link rel="alternate" href="/atom.xml" title="FrostSakura的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">FrostSakura的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录我的学习和生活</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-二分查找" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/28/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="article-date">
+  <time class="dt-published" datetime="2025-03-28T15:15:14.208Z" itemprop="datePublished">2025-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      二分查找
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="红蓝染色法"><a href="#红蓝染色法" class="headerlink" title="红蓝染色法"></a>红蓝染色法</h1><p><img src="/..%5Cassets%5Chtpmwltg9unspvq2%5C1740999564668-c2c347df-3b11-4fd3-8b31-ff4d69aeb066.png"></p>
+<p>我们用left代表蓝色, right代表红色, 蓝色和红色一定是互斥的, 比如蓝色规定代表&lt;&#x3D; target的区域, 那么红色就代表&gt;target的区域</p>
+<p>我们如何才能表示成红蓝染色呢？我们可以采用”(“ &#x2F; “[“ left, right “]” &#x2F; “)”的形式。我们规定”[“表示元素本身以及区域以内的元素是未染色的，规定”(“则不包含元素本身。括号内的是还未染色的区域，括号外的是已经染色的区域，这样我们就可以形象地表示出红色区域，蓝色区域以及未处理的元素区域。</p>
+<p>我们通过不断将数组的中间元素和要寻找的元素相比较，来染色未处理得区域，直到所有区域都染色完毕。</p>
+<p>值得一提的是，left和right的移动应该根据它们代表的是开区间还是闭区间来移动。如果是闭区间的话，left或right不能指向mid本身，因为闭区间表示元素本身以及区域内的元素是未处理的，但是很明显，mid已经处理了。</p>
+<p>由于数组每次都收缩一半，最终的时间复杂度是O(logn)的。</p>
+<h1 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h1><p>这里就根据灵神推荐的开区间写法来写。</p>
+<h2 id="查找指定元素"><a href="#查找指定元素" class="headerlink" title="查找指定元素"></a>查找指定元素</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> lowerBound(nums, target);</span><br><span class="line">        <span class="keyword">return</span> ans &lt; nums.length &amp;&amp; nums[ans] == target ? ans : -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">lowerBound</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="keyword">while</span> (left + <span class="number">1</span> &lt; right) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">                left = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查找最后一个"><a href="#查找最后一个" class="headerlink" title="查找最后一个&lt;&#x2F;&lt;&#x3D; 或者 第一个&gt;&#x2F;&gt;&#x3D;"></a>查找最后一个&lt;&#x2F;&lt;&#x3D; 或者 第一个&gt;&#x2F;&gt;&#x3D;</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> lowerBound(nums, target);</span><br><span class="line">        <span class="keyword">return</span> ans &lt; nums.length &amp;&amp; nums[ans] == target ? ans : -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">lowerBound</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="keyword">while</span> (left + <span class="number">1</span> &lt; right) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">                left = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left/right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>边界条件是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">left == -<span class="number">1</span> 或者 right == nums.length</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>lowerBound:寻找第一个大于等于target的下标</p>
+<p>upperBound:寻找第一个大于target的下标</p>
+<p>如果要找最后一个小于target的下标，就是lowerBound(target) - 1</p>
+<p>如果要找最后一个小于等于target的下标，就是upperBound(target) - 1或者<font style="color:#DF2A3F;">lowerBound(target + 1) - 1</font></p>
+<h1 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h1><p>如果只有一个二分值，有些时候要进行边界条件判断，因为可能会引起数组下标越界。</p>
+<p>但是如果是两个二分值之差确定个数或者距离，我们没有这种烦恼，相对位置是确定的，不用进行边界条件判断。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/03/28/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" data-id="cm8sxh3ng0000y0ssenexhsxl" data-title="二分查找" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+</section>
+        
+          <aside id="sidebar">
+  
+    
 
-{% block page_class %}page-post-detail{% endblock %}
+  
+    
 
-
-{% block content %}
-
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
-
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">三月 2025</a></li></ul>
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/03/28/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 FrostSakura<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
